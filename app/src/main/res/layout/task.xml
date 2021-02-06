@@ -2,8 +2,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/background_light"
-    android:orientation="vertical">
+    android:background="@color/cardview_light_background"
+    android:orientation="vertical"
+    android:padding="5dp"
+    android:layout_margin="5dp"
+    >
 
     <TextView
         android:id="@+id/taskTitle"
@@ -11,7 +14,10 @@
         android:layout_height="wrap_content"
         android:layout_weight="2"
         android:text="Title"
-        android:textSize="40dp" />
+        android:textSize="30dp"
+        android:textColor="@color/black"
+        android:ellipsize="end"
+        android:singleLine="true"/>
 
     <TextView
         android:id="@+id/taskBody"
@@ -19,7 +25,9 @@
         android:layout_height="wrap_content"
         android:layout_weight="12"
         android:text="Body"
-        android:textSize="30dp" />
+        android:textSize="15dp"
+        android:ellipsize="end"
+        android:singleLine="true"/>
 
     <TextView
         android:id="@+id/taskTime"
@@ -28,5 +36,5 @@
         android:layout_weight="1"
         android:gravity="bottom|right"
         android:text="00:00 11.11.2020"
-        android:textSize="20dp" />
+        android:textSize="10dp" />
 </LinearLayout>
