@@ -27,7 +27,7 @@ public class FirstFragment extends Fragment {
 
         for (int i = 0; i <10 ; i++) {
             Task task = new Task(view.getContext());
-            task.setAllInfo("Title"+ i, "Чтобы быть молодым и сильным нужно каждый день мыть попу" + i,""+i);
+            task.setAllInfo("Title"+ i, "Чтобы быть молодым и сильным нужно каждый день..." + i,""+i);
             layout.addView(task);
         }
     }
