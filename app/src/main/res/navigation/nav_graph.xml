@@ -24,5 +24,36 @@
         <action
             android:id="@+id/action_SecondFragment_to_FirstFragment"
             app:destination="@id/FirstFragment" />
+        <argument
+            android:name="title"
+            app:argType="string" />
+        <argument
+            android:name="time"
+            app:argType="string" />
+        <argument
+            android:name="body"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_SecondFragment_to_taskRewrite"
+            app:destination="@id/taskRewrite" />
     </fragment>
+    <fragment
+        android:id="@+id/taskRewrite"
+        android:name="ru.same.scheduler.TaskRewrite"
+        android:label="fragment_third"
+        tools:layout="@layout/fragment_third" >
+        <action
+            android:id="@+id/action_ThirdFragment_to_SecondFragment"
+            app:destination="@id/SecondFragment" />
+        <argument
+            android:name="title"
+            app:argType="string" />
+        <argument
+            android:name="time"
+            app:argType="string" />
+        <argument
+            android:name="body"
+            app:argType="string" />
+    </fragment>
+
 </navigation>

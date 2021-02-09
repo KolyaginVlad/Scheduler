@@ -8,6 +8,7 @@ import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.fragment.NavHostFragment;
 
 public class TaskTree extends Fragment {
@@ -29,6 +30,19 @@ public class TaskTree extends Fragment {
             Task task = new Task(view.getContext());
             task.setAllInfo("Title"+ i, "Чтобы быть молодым и сильным нужно каждый день..." + i,""+i);
             layout.addView(task);
+            task.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Bundle bundle = new Bundle();
+                    bundle.putString("title", task.getTitle().getText().toString());
+                    bundle.putString("time", task.getTime().getText().toString());
+                    bundle.putString("body", task.getBody().getText().toString());
+                    setArguments(bundle);
+                    NavHostFragment.findNavController(TaskTree.this)
+                            .navigate(R.id.action_FirstFragment_to_SecondFragment, bundle);
+
+                }
+            });
         }
     }
 }

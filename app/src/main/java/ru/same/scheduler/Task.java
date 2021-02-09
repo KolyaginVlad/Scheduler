@@ -16,6 +16,18 @@ public class Task extends LinearLayout {
         init(context);
     }
 
+    public TextView getTitle() {
+        return title;
+    }
+
+    public TextView getBody() {
+        return body;
+    }
+
+    public TextView getTime() {
+        return time;
+    }
+
     private void init(Context context){
         View.inflate(context,R.layout.task,this);
         title = findViewById(R.id.taskTitle);
