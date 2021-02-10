@@ -54,6 +54,12 @@
         <argument
             android:name="body"
             app:argType="string" />
+        <argument
+            android:name="isRewrite"
+            app:argType="boolean" />
+        <action
+            android:id="@+id/action_taskRewrite_to_FirstFragment"
+            app:destination="@id/FirstFragment" />
     </fragment>
 
 </navigation>

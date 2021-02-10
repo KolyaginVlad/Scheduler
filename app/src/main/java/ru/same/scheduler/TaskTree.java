@@ -11,6 +11,11 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.fragment.NavHostFragment;
 
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
+import io.realm.RealmConfiguration.Builder;
+import io.realm.RealmResults;
+
 public class TaskTree extends Fragment {
 
     @Override
@@ -25,10 +30,12 @@ public class TaskTree extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         LinearLayout layout = (LinearLayout) view.findViewById(R.id.layout1);
-
-        for (int i = 0; i <10 ; i++) {
+        Realm realm = Realm.getDefaultInstance();
+        RealmResults<TaskBean> allTasks = realm.where(TaskBean.class).findAll();
+        for (TaskBean taskBean: allTasks
+             ) {
             Task task = new Task(view.getContext());
-            task.setAllInfo("Title"+ i, "Чтобы быть молодым и сильным нужно каждый день..." + i,""+i);
+            task.setAllInfo(taskBean.getTitle(), taskBean.getBody(), taskBean.getTime());
             layout.addView(task);
             task.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -44,5 +51,6 @@ public class TaskTree extends Fragment {
                 }
             });
         }
+
     }
 }

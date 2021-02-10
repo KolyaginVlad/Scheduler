@@ -3,9 +3,15 @@ e
 5app/src/main/java/ru/same/scheduler/MainActivity.java,a\f\af9c5d9f33fee0e4d70aab12a6909caf0b92c166
 ]
 -app/src/main/java/ru/same/scheduler/Task.java,1\e\1e90f48db5a9296e33f47916afdf51b839dcef03
-g
-7app/src/main/java/ru/same/scheduler/SecondFragment.java,b\7\b7f709937255e3d9d05c8cae9d0a963a44ac722a
-f
-6app/src/main/java/ru/same/scheduler/FirstFragment.java,9\4\945334a45c36cf51b5216805fad997d41452a219
 @
 app/build.gradle,f\4\f4a01d6a4fcb971362ec00a83903fd3902f52164
+S
+#.idea/sonarlint/issuestore/index.pb,9\f\9fe84ebb15faf917b7def6236dba604453cc61e0
+P
+ app/src/main/AndroidManifest.xml,8\c\8c55c3ccc257e5907959013f99656e4c8ec3903e
+d
+4app/src/main/java/ru/same/scheduler/TaskRewrite.java,2\c\2c92fb4841bb24ce48935427e44aaaa148a23823
+c
+3app/src/main/java/ru/same/scheduler/TaskSingle.java,0\7\077fd1cfafec854189e4466e6bd412bc9999f426
+a
+1app/src/main/java/ru/same/scheduler/TaskTree.java,d\2\d2134c95deb278f7683396d1d6d92822e906e14d

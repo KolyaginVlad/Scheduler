@@ -62,6 +62,7 @@ public class TaskSingle extends Fragment {
         bundle.putString("title", title);
         bundle.putString("time",time);
         bundle.putString("body",body);
+        bundle.putBoolean("isRewrite",true);
         NavHostFragment.findNavController(TaskSingle.this)
                 .navigate(R.id.action_SecondFragment_to_taskRewrite, bundle);
     }

@@ -7,11 +7,15 @@ import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-
+import androidx.navigation.Navigation;
+import io.realm.RealmConfiguration;
 import android.view.View;
 
 import android.view.Menu;
 import android.view.MenuItem;
+
+import io.realm.Realm;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -21,13 +25,16 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        Realm.init(this);
+        Realm realm = Realm.getDefaultInstance();
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
+                Navigation.findNavController(findViewById(R.id.nav_host_fragment)).navigate(R.id.taskRewrite);
+
             }
         });
     }
