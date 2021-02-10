@@ -19,7 +19,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                >
 
                 <Button
                     android:id="@+id/button2"
@@ -37,7 +38,8 @@
                     android:layout_weight="10"
                     android:background="@color/white"
                     android:backgroundTint="@color/white"
-                    app:backgroundTint="@color/white" />
+                    app:backgroundTint="@color/white"
+                    android:visibility="invisible"/>
 
                 <ImageView
                     android:id="@+id/button1"
@@ -60,7 +62,8 @@
                 android:singleLine="true"
                 android:text="Title"
                 android:textColor="@color/black"
-                android:textSize="40dp" />
+                android:textSize="40dp"
+                android:hint="Задача"/>
 
             <TextView
                 android:id="@+id/time3"
@@ -80,7 +83,8 @@
                 android:layout_weight="12"
                 android:inputType="textMultiLine"
                 android:text="Body"
-                android:textSize="25dp" />
+                android:textSize="25dp"
+                android:hint="Описание"/>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
