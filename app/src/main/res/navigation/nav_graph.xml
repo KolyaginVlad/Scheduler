@@ -41,7 +41,7 @@
         android:id="@+id/taskRewrite"
         android:name="ru.same.scheduler.TaskRewrite"
         android:label="fragment_third"
-        tools:layout="@layout/fragment_third" >
+        tools:layout="@layout/fragment_third">
         <action
             android:id="@+id/action_ThirdFragment_to_SecondFragment"
             app:destination="@id/SecondFragment" />

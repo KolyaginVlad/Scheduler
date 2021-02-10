@@ -1,27 +1,24 @@
 package ru.same.scheduler;
 
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.navigation.fragment.NavHostFragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
+
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import io.realm.Realm;
-import io.realm.RealmConfiguration;
 
 
 public class TaskRewrite extends Fragment {
-
 
 
     @Override
@@ -44,9 +41,9 @@ public class TaskRewrite extends Fragment {
         TextView time = view.findViewById(R.id.time3);
         EditText body = view.findViewById(R.id.body3);
         Bundle bundle1 = this.getArguments();
-        title.setText(bundle1.getString("title"));
-        time.setText(bundle1.getString("time"));
-        body.setText(bundle1.getString("body"));
+        title.setText(bundle1.getString(Constants.TITLE_FIELD));
+        time.setText(bundle1.getString(Constants.TIME_FIELD));
+        body.setText(bundle1.getString(Constants.BODY_FIELD));
         view.findViewById(R.id.button1).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -54,29 +51,28 @@ public class TaskRewrite extends Fragment {
                 Realm realm = Realm.getDefaultInstance();
                 if (!bundle1.getBoolean("isRewrite")) {
                     Calendar calendar = new GregorianCalendar();
-                    bundle.putString("time", calendar.get(Calendar.DAY_OF_MONTH)+"."+(calendar.get(Calendar.MONTH)+1)+"."+calendar.get(Calendar.YEAR));
+                    bundle.putString(Constants.TIME_FIELD, calendar.get(Calendar.DAY_OF_MONTH) + "." + (calendar.get(Calendar.MONTH) + 1) + "." + calendar.get(Calendar.YEAR));
                     realm.beginTransaction();
                     TaskBean taskBean = realm.createObject(TaskBean.class);
                     taskBean.setBody(body.getText().toString());
-                    taskBean.setTime(calendar.get(Calendar.DAY_OF_MONTH)+"."+(calendar.get(Calendar.MONTH)+1)+"."+calendar.get(Calendar.YEAR));
+                    taskBean.setTime(calendar.get(Calendar.DAY_OF_MONTH) + "." + (calendar.get(Calendar.MONTH) + 1) + "." + calendar.get(Calendar.YEAR));
                     taskBean.setTitle(title.getText().toString());
                     realm.commitTransaction();
-                }
-                else {
-                    bundle.putString("time", time.getText().toString());
+                } else {
+                    bundle.putString(Constants.TIME_FIELD, time.getText().toString());
                     realm.beginTransaction();
-                        TaskBean taskBean = realm.where(TaskBean.class).equalTo("title", bundle1.getString("title"))
-                                .equalTo("time", bundle1.getString("time"))
-                                .equalTo("body", bundle1.getString("body"))
-                                .findFirst();
-                        taskBean.setTitle(title.getText().toString());
-                        taskBean.setBody(body.getText().toString());
+                    TaskBean taskBean = realm.where(TaskBean.class).equalTo(Constants.TITLE_FIELD, bundle1.getString(Constants.TITLE_FIELD))
+                            .equalTo(Constants.TIME_FIELD, bundle1.getString(Constants.TIME_FIELD))
+                            .equalTo(Constants.BODY_FIELD, bundle1.getString(Constants.BODY_FIELD))
+                            .findFirst();
+                    taskBean.setTitle(title.getText().toString());
+                    taskBean.setBody(body.getText().toString());
                     realm.commitTransaction();
                 }
-                    bundle.putString("title", title.getText().toString());
-                    bundle.putString("body",body.getText().toString());
-                    NavHostFragment.findNavController(TaskRewrite.this)
-                            .navigate(R.id.action_ThirdFragment_to_SecondFragment, bundle);
+                bundle.putString(Constants.TITLE_FIELD, title.getText().toString());
+                bundle.putString(Constants.BODY_FIELD, body.getText().toString());
+                NavHostFragment.findNavController(TaskRewrite.this)
+                        .navigate(R.id.action_ThirdFragment_to_SecondFragment, bundle);
             }
         });
         view.findViewById(R.id.button2).setOnClickListener(new View.OnClickListener() {
@@ -84,12 +80,11 @@ public class TaskRewrite extends Fragment {
             public void onClick(View view) {
                 if (!bundle1.getBoolean("isRewrite")) {
                     NavHostFragment.findNavController(TaskRewrite.this).navigate(R.id.action_taskRewrite_to_FirstFragment);
-                }
-                else{
+                } else {
                     Bundle bundle = new Bundle();
-                    bundle.putString("title", getArguments().getString("title"));
-                    bundle.putString("time", getArguments().getString("time"));
-                    bundle.putString("body", getArguments().getString("body"));
+                    bundle.putString(Constants.TITLE_FIELD, getArguments().getString(Constants.TITLE_FIELD));
+                    bundle.putString(Constants.TIME_FIELD, getArguments().getString(Constants.TIME_FIELD));
+                    bundle.putString(Constants.BODY_FIELD, getArguments().getString(Constants.BODY_FIELD));
                     NavHostFragment.findNavController(TaskRewrite.this)
                             .navigate(R.id.action_ThirdFragment_to_SecondFragment, bundle);
                 }

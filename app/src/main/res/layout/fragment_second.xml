@@ -13,7 +13,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
             <Button
                 android:id="@+id/button1"
@@ -41,11 +41,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:fontFamily="sans-serif-thin"
                 android:gravity="bottom|right"
                 android:text="00:00 11.11.2020"
-                android:fontFamily="sans-serif-thin"
                 android:textColor="@color/black"
-                android:textSize="15dp"/>
+                android:textSize="15dp" />
 
             <TextView
                 android:id="@+id/body2"
@@ -53,8 +53,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="12"
                 android:text="Body"
-                android:textSize="25dp"
-                />
+                android:textSize="25dp" />
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -28,9 +28,9 @@ public class TaskSingle extends Fragment {
         TextView time = view.findViewById(R.id.time2);
         TextView body = view.findViewById(R.id.body2);
         Bundle bundle = this.getArguments();
-        title.setText(bundle.getString("title"));
-        time.setText(bundle.getString("time"));
-        body.setText(bundle.getString("body"));
+        title.setText(bundle.getString(Constants.TITLE_FIELD));
+        time.setText(bundle.getString(Constants.TIME_FIELD));
+        body.setText(bundle.getString(Constants.BODY_FIELD));
         view.findViewById(R.id.button1).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -57,12 +57,13 @@ public class TaskSingle extends Fragment {
             }
         });
     }
-    private void goToRewrite(String title, String time, String body){
+
+    private void goToRewrite(String title, String time, String body) {
         Bundle bundle = new Bundle();
-        bundle.putString("title", title);
-        bundle.putString("time",time);
-        bundle.putString("body",body);
-        bundle.putBoolean("isRewrite",true);
+        bundle.putString(Constants.TITLE_FIELD, title);
+        bundle.putString(Constants.TIME_FIELD, time);
+        bundle.putString(Constants.BODY_FIELD, body);
+        bundle.putBoolean("isRewrite", true);
         NavHostFragment.findNavController(TaskSingle.this)
                 .navigate(R.id.action_SecondFragment_to_taskRewrite, bundle);
     }
