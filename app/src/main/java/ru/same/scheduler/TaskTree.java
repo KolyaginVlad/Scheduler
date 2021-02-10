@@ -1,10 +1,14 @@
 package ru.same.scheduler;
 
 import android.os.Bundle;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -18,6 +22,8 @@ import io.realm.RealmResults;
 
 public class TaskTree extends Fragment {
 
+    private static final int IDM_DELETE = 1;
+
     @Override
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container,
@@ -26,10 +32,10 @@ public class TaskTree extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_first, container, false);
     }
-
+    private LinearLayout layout;
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        LinearLayout layout = (LinearLayout) view.findViewById(R.id.layout1);
+        layout = (LinearLayout) view.findViewById(R.id.layout1);
         Realm realm = Realm.getDefaultInstance();
         RealmResults<TaskBean> allTasks = realm.where(TaskBean.class).findAll();
         for (TaskBean taskBean: allTasks
@@ -50,7 +56,41 @@ public class TaskTree extends Fragment {
 
                 }
             });
+            registerForContextMenu(task);
         }
 
+    }
+    private Task clicked;
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v,
+                                    ContextMenu.ContextMenuInfo menuInfo)
+    {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        menu.add(Menu.NONE, IDM_DELETE, Menu.NONE, "Удалить");
+        clicked = (Task)v;
+    }
+    @Override
+    public boolean onContextItemSelected(MenuItem item)
+    {
+
+        switch (item.getItemId())
+        {
+            case IDM_DELETE:
+                Realm realm = Realm.getDefaultInstance();
+                realm.beginTransaction();
+                TaskBean taskBean = realm.where(TaskBean.class)
+                        .equalTo("body", clicked.getBody().getText().toString())
+                        .equalTo("time", clicked.getTime().getText().toString())
+                        .equalTo("title", clicked.getTitle().getText().toString())
+                        .findFirst();
+                taskBean.deleteFromRealm();
+                realm.commitTransaction();
+                layout.removeView(clicked);
+                break;
+            default:
+                return super.onContextItemSelected(item);
+        }
+
+        return true;
     }
 }
