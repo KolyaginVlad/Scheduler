@@ -15,3 +15,17 @@ c
 3app/src/main/java/ru/same/scheduler/TaskSingle.java,0\7\077fd1cfafec854189e4466e6bd412bc9999f426
 a
 1app/src/main/java/ru/same/scheduler/TaskTree.java,d\2\d2134c95deb278f7683396d1d6d92822e906e14d
+<
+build.gradle,f\0\f07866736216be0ee2aba49e392191aeae700a35
+a
+1app/src/main/java/ru/same/scheduler/TaskBean.java,4\3\437ff6bfcb16f306ab4af43c1469b10333f88978
+w
+Gapp/src/androidTest/java/ru/same/scheduler/ExampleInstrumentedTest.java,e\c\ec7fd58f6ebf638418c9ea32b65843fe41f01b09
+b
+2app/src/main/java/ru/same/scheduler/Constants.java,9\5\95477fec8aace4062216acb00aaf9d7bb6f90691
+Z
+*app/src/main/res/layout/fragment_first.xml,7\4\7450ec056feedbcd56d68c55c2435f3494e87faf
+P
+ app/src/main/res/layout/task.xml,a\3\a3dc29b972029ce41fd2ef3455211d9341e87265
+h
+8app/src/test/java/ru/same/scheduler/ExampleUnitTest.java,c\6\c607377062a1094cf0eae1acb8bcd588ee09c8e5

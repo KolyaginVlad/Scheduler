@@ -1,5 +1,7 @@
 package ru.same.scheduler;
 
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,7 +17,6 @@ import io.realm.Realm;
 
 
 public class MainActivity extends AppCompatActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,5 +57,30 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        finish();
+
+//        Intent i = new Intent(Intent.ACTION_MAIN);
+//        i.addCategory(Intent.CATEGORY_HOME);
+//        i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//        startActivity(i);
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+//        {
+//            finishAndRemoveTask();
+//        }
+//        else
+//        {
+//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN)
+//            {
+//                finishAffinity();
+//            } else
+//            {
+//                finish();
+//            }
+//        }
+
     }
 }
