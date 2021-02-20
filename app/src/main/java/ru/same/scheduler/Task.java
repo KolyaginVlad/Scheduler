@@ -7,49 +7,43 @@ import android.widget.TextView;
 
 
 public class Task extends LinearLayout {
-    private TextView title;
-    private TextView body;
-    private TextView time;
+    private String title;
+    private String body;
+    private String time;
 
     public Task(Context context) {
         super(context);
-        init(context);
     }
 
-    public TextView getTitle() {
+    public String getTitle() {
         return title;
     }
 
     public void setTitle(String title) {
-        this.title.setText(title);
+        this.title=title;
     }
 
-    public TextView getBody() {
+    public String getBody() {
         return body;
     }
 
     public void setBody(String body) {
-        this.body.setText(body);
+        this.body=body;
     }
 
-    public TextView getTime() {
+    public String getTime() {
         return time;
     }
 
     public void setTime(String time) {
-        this.time.setText(time);
+        this.time=time;
     }
 
-    private void init(Context context) {
-        View.inflate(context, R.layout.task, this);
-        title = findViewById(R.id.taskTitle);
-        body = findViewById(R.id.taskBody);
-        time = findViewById(R.id.taskTime);
-    }
+
 
     public void setAllInfo(String tit, String bod, String tim) {
-        title.setText(tit);
-        body.setText(bod);
-        time.setText(tim);
+        title= tit;
+        body = bod;
+        time =tim;
     }
 }

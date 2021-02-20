@@ -5,6 +5,7 @@ import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -13,6 +14,10 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import io.realm.Realm;
 import io.realm.RealmResults;
@@ -20,7 +25,6 @@ import io.realm.RealmResults;
 public class TaskTree extends Fragment {
 
     private static final int IDM_DELETE = 1;
-    private LinearLayout layout;
     private Task clicked;
 
     @Override
@@ -31,24 +35,25 @@ public class TaskTree extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_first, container, false);
     }
-
+    RecyclerView recyclerView;
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        layout = (LinearLayout) view.findViewById(R.id.layout1);
+        recyclerView = (RecyclerView) view.findViewById(R.id.list);
+        List<Task> tasks = new ArrayList<>();
         Realm realm = Realm.getDefaultInstance();
         RealmResults<TaskBean> allTasks = realm.where(TaskBean.class).findAll();
         for (TaskBean taskBean : allTasks
         ) {
             Task task = new Task(view.getContext());
             task.setAllInfo(taskBean.getTitle(), taskBean.getBody(), taskBean.getTime());
-            layout.addView(task);
+            tasks.add(task);
             task.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Bundle bundle = new Bundle();
-                    bundle.putString(Constants.TITLE_FIELD, task.getTitle().getText().toString());
-                    bundle.putString(Constants.TIME_FIELD, task.getTime().getText().toString());
-                    bundle.putString(Constants.BODY_FIELD, task.getBody().getText().toString());
+                    bundle.putString(Constants.TITLE_FIELD, task.getTitle());
+                    bundle.putString(Constants.TIME_FIELD, task.getTime());
+                    bundle.putString(Constants.BODY_FIELD, task.getBody());
                     setArguments(bundle);
                     NavHostFragment.findNavController(TaskTree.this)
                             .navigate(R.id.action_FirstFragment_to_SecondFragment, bundle);
@@ -57,6 +62,8 @@ public class TaskTree extends Fragment {
             });
             registerForContextMenu(task);
         }
+        TaskAdapter adapter = new TaskAdapter(view.getContext(), tasks);
+        recyclerView.setAdapter(adapter);
 
     }
 
@@ -76,13 +83,13 @@ public class TaskTree extends Fragment {
                 Realm realm = Realm.getDefaultInstance();
                 realm.beginTransaction();
                 TaskBean taskBean = realm.where(TaskBean.class)
-                        .equalTo(Constants.BODY_FIELD, clicked.getBody().getText().toString())
-                        .equalTo(Constants.TIME_FIELD, clicked.getTime().getText().toString())
-                        .equalTo(Constants.TITLE_FIELD, clicked.getTitle().getText().toString())
+                        .equalTo(Constants.BODY_FIELD, clicked.getBody())
+                        .equalTo(Constants.TIME_FIELD, clicked.getTime())
+                        .equalTo(Constants.TITLE_FIELD, clicked.getTitle())
                         .findFirst();
                 taskBean.deleteFromRealm();
                 realm.commitTransaction();
-                layout.removeView(clicked);
+                recyclerView.removeView(clicked);
                 break;
             default:
                 return super.onContextItemSelected(item);
