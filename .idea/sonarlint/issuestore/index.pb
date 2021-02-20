@@ -23,7 +23,5 @@ w
 Gapp/src/androidTest/java/ru/same/scheduler/ExampleInstrumentedTest.java,e\c\ec7fd58f6ebf638418c9ea32b65843fe41f01b09
 b
 2app/src/main/java/ru/same/scheduler/Constants.java,9\5\95477fec8aace4062216acb00aaf9d7bb6f90691
-P
- app/src/main/res/layout/task.xml,a\3\a3dc29b972029ce41fd2ef3455211d9341e87265
 h
 8app/src/test/java/ru/same/scheduler/ExampleUnitTest.java,c\6\c607377062a1094cf0eae1acb8bcd588ee09c8e5
