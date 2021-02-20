@@ -24,6 +24,7 @@
                 android:text=""
                 android:textColor="@color/black"
                 android:textSize="15dp"
+                android:layout_marginRight="8dp"
                 app:layout_constraintBottom_toTopOf="@id/body3"
                 app:layout_constraintRight_toRightOf="parent"
 
@@ -40,6 +41,7 @@
                 android:textColor="@color/black"
                 android:textSize="40dp"
                 android:hint="Задача"
+                android:layout_marginLeft="8dp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toTopOf="@id/body3"/>
@@ -54,6 +56,8 @@
                 android:text="Body"
                 android:textSize="25dp"
                 android:hint="Описание"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/title3"
                 app:layout_constraintBottom_toBottomOf="parent"/>
