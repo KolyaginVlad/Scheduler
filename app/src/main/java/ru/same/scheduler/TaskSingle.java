@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -23,7 +24,6 @@ public class TaskSingle extends Fragment {
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         TextView title = view.findViewById(R.id.title2);
         TextView time = view.findViewById(R.id.time2);
         TextView body = view.findViewById(R.id.body2);
@@ -31,13 +31,13 @@ public class TaskSingle extends Fragment {
         title.setText(bundle.getString(Constants.TITLE_FIELD));
         time.setText(bundle.getString(Constants.TIME_FIELD));
         body.setText(bundle.getString(Constants.BODY_FIELD));
-        view.findViewById(R.id.button1).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                NavHostFragment.findNavController(TaskSingle.this)
-                        .navigate(R.id.action_SecondFragment_to_FirstFragment);
-            }
-        });
+//        view.findViewById(R.id.button1).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                NavHostFragment.findNavController(TaskSingle.this)
+//                        .navigate(R.id.action_SecondFragment_to_FirstFragment);
+//            }
+//        });
         title.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -66,5 +66,6 @@ public class TaskSingle extends Fragment {
         bundle.putBoolean("isRewrite", true);
         NavHostFragment.findNavController(TaskSingle.this)
                 .navigate(R.id.action_SecondFragment_to_taskRewrite, bundle);
+        MainActivity.showOk();
     }
 }

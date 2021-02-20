@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import androidx.appcompat.widget.Toolbar;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -51,7 +52,7 @@ public class TaskTree extends Fragment {
                     setArguments(bundle);
                     NavHostFragment.findNavController(TaskTree.this)
                             .navigate(R.id.action_FirstFragment_to_SecondFragment, bundle);
-
+                    ((Toolbar) getActivity().findViewById(R.id.toolbar)).setNavigationIcon(R.drawable.back);
                 }
             });
             registerForContextMenu(task);

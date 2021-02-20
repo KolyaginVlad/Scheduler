@@ -23,8 +23,6 @@ w
 Gapp/src/androidTest/java/ru/same/scheduler/ExampleInstrumentedTest.java,e\c\ec7fd58f6ebf638418c9ea32b65843fe41f01b09
 b
 2app/src/main/java/ru/same/scheduler/Constants.java,9\5\95477fec8aace4062216acb00aaf9d7bb6f90691
-Z
-*app/src/main/res/layout/fragment_first.xml,7\4\7450ec056feedbcd56d68c55c2435f3494e87faf
 P
  app/src/main/res/layout/task.xml,a\3\a3dc29b972029ce41fd2ef3455211d9341e87265
 h

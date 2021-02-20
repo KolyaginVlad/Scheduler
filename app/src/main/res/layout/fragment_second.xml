@@ -15,15 +15,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <Button
-                android:id="@+id/button1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="left"
-                android:layout_weight="1"
-                android:background="@drawable/abc_vector_test"
-                app:backgroundTint="@color/black" />
-
             <TextView
                 android:id="@+id/title2"
                 android:layout_width="match_parent"
