@@ -1,7 +1,5 @@
 package ru.same.scheduler;
 
-import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -9,7 +7,6 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -18,6 +15,12 @@ import io.realm.Realm;
 
 
 public class MainActivity extends AppCompatActivity {
+
+    private static MenuItem item;
+
+    public static void showOk() {
+        item.setVisible(true);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,12 +31,12 @@ public class MainActivity extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (Navigation.findNavController(findViewById(R.id.nav_host_fragment)).getCurrentDestination().getId()==R.id.SecondFragment)
+                if (Navigation.findNavController(findViewById(R.id.nav_host_fragment)).getCurrentDestination().getId() == R.id.SecondFragment)
                     Navigation.findNavController(findViewById(R.id.nav_host_fragment)).navigate(R.id.FirstFragment);
                 else {
                     Navigation.findNavController(findViewById(R.id.nav_host_fragment)).navigateUp();
                 }
-                if (Navigation.findNavController(findViewById(R.id.nav_host_fragment)).getCurrentDestination().getId()==R.id.FirstFragment){
+                if (Navigation.findNavController(findViewById(R.id.nav_host_fragment)).getCurrentDestination().getId() == R.id.FirstFragment) {
                     toolbar.setNavigationIcon(null);
                 }
                 toolbar.getMenu().findItem(R.id.ok).setVisible(false);
@@ -50,13 +53,13 @@ public class MainActivity extends AppCompatActivity {
 //                        .setAction("Action", null).show();
                 Navigation.findNavController(findViewById(R.id.nav_host_fragment)).navigate(R.id.taskRewrite);
                 toolbar.setNavigationIcon(R.drawable.back);
-                if (Navigation.findNavController(findViewById(R.id.nav_host_fragment)).getCurrentDestination().getId()==R.id.taskRewrite){
+                if (Navigation.findNavController(findViewById(R.id.nav_host_fragment)).getCurrentDestination().getId() == R.id.taskRewrite) {
                     toolbar.getMenu().findItem(R.id.ok).setVisible(true);
                 }
             }
         });
     }
-    private static MenuItem item;
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -65,9 +68,7 @@ public class MainActivity extends AppCompatActivity {
         item.setVisible(false);
         return true;
     }
-    public static void showOk(){
-        item.setVisible(true);
-    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will

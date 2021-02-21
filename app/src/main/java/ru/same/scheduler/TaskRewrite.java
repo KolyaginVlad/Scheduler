@@ -21,6 +21,42 @@ import io.realm.Realm;
 public class TaskRewrite extends Fragment {
 
 
+    private static EditText title;
+    private static TextView time;
+    private static EditText body;
+    private static Bundle bundle1;
+    private static Fragment fragment;
+
+    public static void okClicked() {
+        Bundle bundle = new Bundle();
+        Realm realm = Realm.getDefaultInstance();
+        if (!bundle1.getBoolean("isRewrite")) {
+            Calendar calendar = new GregorianCalendar();
+            bundle.putString(Constants.TIME_FIELD, calendar.get(Calendar.DAY_OF_MONTH) + "." + (calendar.get(Calendar.MONTH) + 1) + "." + calendar.get(Calendar.YEAR));
+            realm.beginTransaction();
+            TaskBean taskBean = realm.createObject(TaskBean.class);
+            taskBean.setBody(body.getText().toString());
+            taskBean.setTime(calendar.get(Calendar.DAY_OF_MONTH) + "." + (calendar.get(Calendar.MONTH) + 1) + "." + calendar.get(Calendar.YEAR));
+            taskBean.setTitle(title.getText().toString());
+            realm.commitTransaction();
+        } else {
+            bundle.putString(Constants.TIME_FIELD, time.getText().toString());
+            realm.beginTransaction();
+            TaskBean taskBean = realm.where(TaskBean.class).equalTo(Constants.TITLE_FIELD, bundle1.getString(Constants.TITLE_FIELD))
+                    .equalTo(Constants.TIME_FIELD, bundle1.getString(Constants.TIME_FIELD))
+                    .equalTo(Constants.BODY_FIELD, bundle1.getString(Constants.BODY_FIELD))
+                    .findFirst();
+            taskBean.setTitle(title.getText().toString());
+            taskBean.setBody(body.getText().toString());
+            realm.commitTransaction();
+        }
+        bundle.putString(Constants.TITLE_FIELD, title.getText().toString());
+        bundle.putString(Constants.BODY_FIELD, body.getText().toString());
+        NavHostFragment.findNavController(fragment)
+                .navigate(R.id.action_ThirdFragment_to_SecondFragment, bundle);
+
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,41 +69,6 @@ public class TaskRewrite extends Fragment {
 
         return inflater.inflate(R.layout.fragment_third, container, false);
     }
-  private static EditText title;
-  private static TextView time;
-  private static EditText body;
-  private static Bundle bundle1;
-  private static Fragment fragment;
-    public static void okClicked(){
-        Bundle bundle = new Bundle();
-                Realm realm = Realm.getDefaultInstance();
-                if (!bundle1.getBoolean("isRewrite")) {
-                    Calendar calendar = new GregorianCalendar();
-                    bundle.putString(Constants.TIME_FIELD, calendar.get(Calendar.DAY_OF_MONTH) + "." + (calendar.get(Calendar.MONTH) + 1) + "." + calendar.get(Calendar.YEAR));
-                    realm.beginTransaction();
-                    TaskBean taskBean = realm.createObject(TaskBean.class);
-                    taskBean.setBody(body.getText().toString());
-                    taskBean.setTime(calendar.get(Calendar.DAY_OF_MONTH) + "." + (calendar.get(Calendar.MONTH) + 1) + "." + calendar.get(Calendar.YEAR));
-                    taskBean.setTitle(title.getText().toString());
-                    realm.commitTransaction();
-                } else {
-                    bundle.putString(Constants.TIME_FIELD, time.getText().toString());
-                    realm.beginTransaction();
-                    TaskBean taskBean = realm.where(TaskBean.class).equalTo(Constants.TITLE_FIELD, bundle1.getString(Constants.TITLE_FIELD))
-                            .equalTo(Constants.TIME_FIELD, bundle1.getString(Constants.TIME_FIELD))
-                            .equalTo(Constants.BODY_FIELD, bundle1.getString(Constants.BODY_FIELD))
-                            .findFirst();
-                    taskBean.setTitle(title.getText().toString());
-                    taskBean.setBody(body.getText().toString());
-                    realm.commitTransaction();
-                }
-                bundle.putString(Constants.TITLE_FIELD, title.getText().toString());
-                bundle.putString(Constants.BODY_FIELD, body.getText().toString());
-                NavHostFragment.findNavController(fragment)
-                        .navigate(R.id.action_ThirdFragment_to_SecondFragment, bundle);
-
-    }
-
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {

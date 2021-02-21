@@ -1,9 +1,7 @@
 package ru.same.scheduler;
 
 import android.content.Context;
-import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 
 public class Task extends LinearLayout {
@@ -20,7 +18,7 @@ public class Task extends LinearLayout {
     }
 
     public void setTitle(String title) {
-        this.title=title;
+        this.title = title;
     }
 
     public String getBody() {
@@ -28,7 +26,7 @@ public class Task extends LinearLayout {
     }
 
     public void setBody(String body) {
-        this.body=body;
+        this.body = body;
     }
 
     public String getTime() {
@@ -36,14 +34,13 @@ public class Task extends LinearLayout {
     }
 
     public void setTime(String time) {
-        this.time=time;
+        this.time = time;
     }
 
 
-
     public void setAllInfo(String tit, String bod, String tim) {
-        title= tit;
+        title = tit;
         body = bod;
-        time =tim;
+        time = tim;
     }
 }

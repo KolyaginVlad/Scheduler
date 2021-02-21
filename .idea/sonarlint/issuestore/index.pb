@@ -25,3 +25,15 @@ b
 2app/src/main/java/ru/same/scheduler/Constants.java,9\5\95477fec8aace4062216acb00aaf9d7bb6f90691
 h
 8app/src/test/java/ru/same/scheduler/ExampleUnitTest.java,c\6\c607377062a1094cf0eae1acb8bcd588ee09c8e5
+Y
+)app/src/main/res/drawable-anydpi/back.xml,f\e\fe20523d06991a75a9ca8eaedee024d4d1bd785d
+W
+'app/src/main/res/drawable-anydpi/ok.xml,8\2\820141c4bf86cb417784b9ef2dc0450f79db6115
+Y
+)app/src/main/res/layout/activity_main.xml,7\6\76b07e40f24cce093536731477540f12e7da3cb6
+Z
+*app/src/main/res/layout/fragment_third.xml,a\7\a71b3a07d0c9b407791de9a20bc6f223d0638d5b
+[
++app/src/main/res/layout/fragment_second.xml,7\9\794c8279c6e87420aa0d12af0d178fd28bf60e1f
+d
+4app/src/main/java/ru/same/scheduler/TaskAdapter.java,8\4\84125bc8ae3a4695126d2de7d8d39aec9d53d8c6
