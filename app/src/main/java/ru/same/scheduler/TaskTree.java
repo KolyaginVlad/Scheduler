@@ -34,6 +34,7 @@ public class TaskTree extends Fragment {
         return inflater.inflate(R.layout.fragment_first, container, false);
     }
 
+    @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         recyclerView = view.findViewById(R.id.list);
@@ -44,7 +45,7 @@ public class TaskTree extends Fragment {
         for (TaskBean taskBean : allTasks
         ) {
             Task task = new Task(view.getContext());
-            task.setAllInfo(taskBean.getTitle(), taskBean.getBody(), taskBean.getTime());
+            task.setAllInfo(taskBean.getTitle(), taskBean.getBody(), taskBean.getTime(), taskBean.getPath1(), taskBean.getPath2(), taskBean.getPath3(), taskBean.getPath4(), taskBean.getPath5());
             tasks.add(task);
 //            task.setOnClickListener(new View.OnClickListener() {
 //                @Override
@@ -68,6 +69,7 @@ public class TaskTree extends Fragment {
                 bundle.putString(Constants.TITLE_FIELD, tasks.get(position).getTitle());
                 bundle.putString(Constants.TIME_FIELD, tasks.get(position).getTime());
                 bundle.putString(Constants.BODY_FIELD, tasks.get(position).getBody());
+                bundle.putStringArray(Constants.NOTES_ARRAY_FIELD, tasks.get(position).getNotes());
                 setArguments(bundle);
                 NavHostFragment.findNavController(TaskTree.this)
                         .navigate(R.id.action_FirstFragment_to_SecondFragment, bundle);
@@ -89,6 +91,11 @@ public class TaskTree extends Fragment {
                         .equalTo(Constants.BODY_FIELD, tasks.get(((TaskAdapter) recyclerView.getAdapter()).getPosition()).getBody())
                         .equalTo(Constants.TIME_FIELD, tasks.get(((TaskAdapter) recyclerView.getAdapter()).getPosition()).getTime())
                         .equalTo(Constants.TITLE_FIELD, tasks.get(((TaskAdapter) recyclerView.getAdapter()).getPosition()).getTitle())
+                        .equalTo(Constants.NOTES_ARRAY_1, tasks.get(((TaskAdapter) recyclerView.getAdapter()).getPosition()).getNotes()[0])
+                        .equalTo(Constants.NOTES_ARRAY_2, tasks.get(((TaskAdapter) recyclerView.getAdapter()).getPosition()).getNotes()[1])
+                        .equalTo(Constants.NOTES_ARRAY_3, tasks.get(((TaskAdapter) recyclerView.getAdapter()).getPosition()).getNotes()[2])
+                        .equalTo(Constants.NOTES_ARRAY_4, tasks.get(((TaskAdapter) recyclerView.getAdapter()).getPosition()).getNotes()[3])
+                        .equalTo(Constants.NOTES_ARRAY_5, tasks.get(((TaskAdapter) recyclerView.getAdapter()).getPosition()).getNotes()[4])
                         .findFirst();
                 taskBean.deleteFromRealm();
                 realm.commitTransaction();
@@ -103,6 +110,7 @@ public class TaskTree extends Fragment {
                         bundle.putString(Constants.TITLE_FIELD, tasks.get(position).getTitle());
                         bundle.putString(Constants.TIME_FIELD, tasks.get(position).getTime());
                         bundle.putString(Constants.BODY_FIELD, tasks.get(position).getBody());
+                        bundle.putStringArray(Constants.NOTES_ARRAY_FIELD, tasks.get(position).getNotes());
                         setArguments(bundle);
                         NavHostFragment.findNavController(TaskTree.this)
                                 .navigate(R.id.action_FirstFragment_to_SecondFragment, bundle);

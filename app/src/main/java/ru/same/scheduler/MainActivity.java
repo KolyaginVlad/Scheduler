@@ -1,12 +1,17 @@
 package ru.same.scheduler;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.navigation.Navigation;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -42,7 +47,12 @@ public class MainActivity extends AppCompatActivity {
                 toolbar.getMenu().findItem(R.id.ok).setVisible(false);
             }
         });
-        toolbar.setNavigationIcon(null);
+        if (Navigation.findNavController(findViewById(R.id.nav_host_fragment)).getCurrentDestination().getId() == R.id.SecondFragment || Navigation.findNavController(findViewById(R.id.nav_host_fragment)).getCurrentDestination().getId() == R.id.taskRewrite)
+            toolbar.setNavigationIcon(R.drawable.back);
+        else
+            toolbar.setNavigationIcon(null);
+        if (Navigation.findNavController(findViewById(R.id.nav_host_fragment)).getCurrentDestination().getId() == R.id.taskRewrite)
+            toolbar.getMenu().findItem(R.id.ok).setVisible(true);
         Realm.init(this);
         Realm realm = Realm.getDefaultInstance();
         FloatingActionButton fab = findViewById(R.id.fab);
@@ -58,6 +68,28 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+        int permissionStatus = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS);
+
+        if (permissionStatus != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                    1);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case 1:
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // permission granted
+
+                } else {
+                    ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                            1);
+                }
+                return;
+        }
     }
 
     @Override
