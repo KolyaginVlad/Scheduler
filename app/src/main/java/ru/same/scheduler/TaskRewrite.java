@@ -1,6 +1,5 @@
 package ru.same.scheduler;
 
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
@@ -103,6 +102,7 @@ public class TaskRewrite extends Fragment {
 
         return inflater.inflate(R.layout.fragment_third, container, false);
     }
+
     public String getRealPathFromURI(Uri uri) {
         String path = "";
         if (getApplicationContext().getContentResolver() != null) {
@@ -124,8 +124,6 @@ public class TaskRewrite extends Fragment {
             // TODO: 27.02.2021 add 10 MB test
             if (data != null) {
                 File file = new File(getRealPathFromURI(data.getData()));
-                if (file.length() == 0)
-                    Log.d("0", data.getDataString() + " " + data.getData().getPath() + " " + data.getData().getEncodedPath());
                 if ((double) (file.length()) / (1024 * 1024) > 10) {
                     Toast toast = Toast.makeText(getApplicationContext(), "Файл слишком велик", Toast.LENGTH_LONG);
                     toast.show();
@@ -184,8 +182,7 @@ public class TaskRewrite extends Fragment {
                     });
                 }
             }
-        }
-        else    {
+        } else {
 
         }
     }
