@@ -31,3 +31,13 @@ Y
 )app/src/main/res/layout/activity_main.xml,7\6\76b07e40f24cce093536731477540f12e7da3cb6
 d
 4app/src/main/java/ru/same/scheduler/TaskAdapter.java,8\4\84125bc8ae3a4695126d2de7d8d39aec9d53d8c6
+Y
+)app/src/main/res/drawable-anydpi/note.xml,0\a\0ae59aed362a6826d08369e3f7d07d08e4784144
+Y
+)app/src/main/res/drawable-anydpi/plus.xml,7\1\711a2c20005715e8550eebff23641c0f53509162
+[
++app/src/main/res/layout/fragment_second.xml,7\9\794c8279c6e87420aa0d12af0d178fd28bf60e1f
+Z
+*app/src/main/res/layout/fragment_third.xml,a\7\a71b3a07d0c9b407791de9a20bc6f223d0638d5b
+Y
+)app/src/main/res/navigation/nav_graph.xml,b\a\baffce053da291d96fb575a09f2bbe9aaa9c4be9
