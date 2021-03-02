@@ -297,10 +297,11 @@ public class TaskRewrite extends Fragment {
                                 }
 
                                 try {
-                                    startActivityForResult(chooserIntent, 1);
                                     int i;
                                     for (i = 0; notes[i] != (TextView) view; i++) ;
                                     add = i;
+                                    startActivityForResult(chooserIntent, 1);
+
                                 } catch (android.content.ActivityNotFoundException ex) {
                                     Toast.makeText(getApplicationContext(), "No suitable File Manager was found.", Toast.LENGTH_SHORT).show();
                                 }
@@ -309,11 +310,12 @@ public class TaskRewrite extends Fragment {
                     }
                     notes[add].setText(paths[add].substring(paths[add].lastIndexOf("/") + 1));
                     registerForContextMenu(notes[add]);
+                    int a = add;
                     notes[add].setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            Log.d("---",paths[add]+" "+add);
-                            Intent openLinkIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(paths[add]));
+                            Log.d("---",paths[a]+" "+a);
+                            Intent openLinkIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(paths[a]));
                             if (openLinkIntent.resolveActivity(getApplicationContext().getPackageManager()) != null) {
                                 startActivityForResult(openLinkIntent, 10);
                             } else {
