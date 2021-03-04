@@ -94,21 +94,7 @@ public class TaskRewrite extends Fragment {
 
     }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-    }
-
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-
-        return inflater.inflate(R.layout.fragment_third, container, false);
-    }
-
-//    public String getRealPathFromURI(Uri uri) {
+    //    public String getRealPathFromURI(Uri uri) {
 //        String path = "";
 //        if (getApplicationContext().getContentResolver() != null) {
 //            Cursor cursor = getApplicationContext().getContentResolver().query(uri, null, null, null, null);
@@ -122,7 +108,6 @@ public class TaskRewrite extends Fragment {
 //        return path;
 //    }
     public static String getPathFromUri(final Context context, final Uri uri) {
-
 
 
         // DocumentProvider
@@ -164,7 +149,7 @@ public class TaskRewrite extends Fragment {
                 }
 
                 final String selection = "_id=?";
-                final String[] selectionArgs = new String[] {
+                final String[] selectionArgs = new String[]{
                         split[1]
                 };
 
@@ -211,7 +196,6 @@ public class TaskRewrite extends Fragment {
         return null;
     }
 
-
     /**
      * @param uri The Uri to check.
      * @return Whether the Uri authority is ExternalStorageProvider.
@@ -245,16 +229,29 @@ public class TaskRewrite extends Fragment {
     }
 
     @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+
+        return inflater.inflate(R.layout.fragment_third, container, false);
+    }
+
+    @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1) {
             // TODO: 27.02.2021 add 10 MB test
             if (data != null) {
-                File file = new File(getPathFromUri(getApplicationContext(),data.getData()));
+                File file = new File(getPathFromUri(getApplicationContext(), data.getData()));
                 boolean flag = false;
-                for (int i = 0; i <Constants.NOTE_NUMBER ; i++) {
-                    if (paths[i]==null) break;
-                    if (paths[i].equals( data.getDataString())){
+                for (int i = 0; i < Constants.NOTE_NUMBER; i++) {
+                    if (paths[i] == null) break;
+                    if (paths[i].equals(data.getDataString())) {
                         flag = true;
                         break;
                     }
@@ -262,12 +259,10 @@ public class TaskRewrite extends Fragment {
                 if ((double) (file.length()) / (1024 * 1024) > 10) {
                     Toast toast = Toast.makeText(getApplicationContext(), "Файл слишком велик", Toast.LENGTH_LONG);
                     toast.show();
-                }
-                else if (flag){
+                } else if (flag) {
                     Toast toast = Toast.makeText(getApplicationContext(), "Такой файл уже добавлен", Toast.LENGTH_LONG);
                     toast.show();
-                }
-                else  {
+                } else {
                     paths[add] = data.getDataString();
                     notes[add].setCompoundDrawablesWithIntrinsicBounds(null, getResources().getDrawable(R.drawable.note), null, null);
                     if (add < Constants.NOTE_NUMBER - 1) {
@@ -314,10 +309,15 @@ public class TaskRewrite extends Fragment {
                     notes[add].setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            Log.d("---",paths[a]+" "+a);
-                            Intent openLinkIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(paths[a]));
+                            Log.d("---", paths[a] + " " + a);
+                            String s = getPathFromUri(getApplicationContext() ,Uri.parse(paths[a]));
+                            Log.d("---", s + " " + a);
+                            //s = s.substring(0, s.lastIndexOf("/")+1);
+                            Log.d("---", s + " " + a);
+                            Intent openLinkIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(s));
+                            openLinkIntent.setDataAndType(Uri.parse(s), "*/*");
                             if (openLinkIntent.resolveActivity(getApplicationContext().getPackageManager()) != null) {
-                                startActivityForResult(openLinkIntent, 10);
+                                startActivity(openLinkIntent);
                             } else {
                                 Log.d("Intent", "Не получается обработать намерение!");
                             }
@@ -365,13 +365,14 @@ public class TaskRewrite extends Fragment {
                 notes[i].setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent openLinkIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(paths[finalI1]));
-
-                        if (openLinkIntent.resolveActivity(getApplicationContext().getPackageManager()) != null) {
-                            startActivityForResult(openLinkIntent, 10);
-                        } else {
-                            Log.d("Intent", "Не получается обработать намерение!");
-                        }
+                        Log.d("---", paths[finalI1] + " " + finalI1);
+                        Intent openLinkIntent = new Intent(Intent.ACTION_VIEW);
+                        String s = getPathFromUri(getApplicationContext() ,Uri.parse(paths[finalI1]));
+                        Log.d("---", s + " " + finalI1);
+                       // s = s.substring(0, s.lastIndexOf("/")+1);
+                        Log.d("---", s + " " + finalI1);
+                        openLinkIntent.setDataAndType(Uri.parse(s), "*/*");
+                        startActivity(openLinkIntent);
                     }
                 });
             } else if (first) {

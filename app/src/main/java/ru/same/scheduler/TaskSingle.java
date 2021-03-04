@@ -13,6 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
+import java.io.File;
+
 import static io.realm.Realm.getApplicationContext;
 
 public class TaskSingle extends Fragment {
@@ -61,14 +63,15 @@ public class TaskSingle extends Fragment {
                 notes[i].setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Uri address = Uri.parse(paths[finalI1]);
-                        Intent openLinkIntent = new Intent(Intent.ACTION_VIEW, address);
+                        Log.d("---", paths[finalI1] + " " + finalI1);
+                        Intent openLinkIntent = new Intent(Intent.ACTION_VIEW);
+                        String s = TaskRewrite.getPathFromUri(getApplicationContext() ,Uri.parse(paths[finalI1]));
+                        Log.d("---", s + " " + finalI1);
+                        //s = s.substring(0, s.lastIndexOf("/")+1);
+                        Log.d("---", s + " " + finalI1);
+                        openLinkIntent.setDataAndType(Uri.parse(s), "*/*");
+                        startActivity(openLinkIntent);
 
-                        if (openLinkIntent.resolveActivity(getApplicationContext().getPackageManager()) != null) {
-                            startActivity(openLinkIntent);
-                        } else {
-                            Log.d("Intent", "Не получается обработать намерение!");
-                        }
                     }
                 });
             } else notes[i].setVisibility(View.INVISIBLE);
