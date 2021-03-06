@@ -56,9 +56,10 @@ public class TaskSingle extends Fragment {
 
         for (int i = 0; i < Constants.NOTE_NUMBER; i++) {
             if (paths[i] != null) {
+                File file = new File(TaskRewrite.getPathFromUri(getApplicationContext(), Uri.parse(paths[i])));
                 notes[i].setVisibility(View.VISIBLE);
                 notes[i].setCompoundDrawablesWithIntrinsicBounds(null, getResources().getDrawable(R.drawable.note), null, null);
-                notes[i].setText(paths[i].substring(paths[i].lastIndexOf("/") + 1));
+                notes[i].setText(file.getName());
                 int finalI1 = i;
                 notes[i].setOnClickListener(new View.OnClickListener() {
                     @Override
