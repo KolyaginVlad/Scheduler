@@ -268,6 +268,7 @@ public class TaskRewrite extends Fragment {
                     notes[add].setCompoundDrawablesWithIntrinsicBounds(null, getResources().getDrawable(R.drawable.note), null, null);
                     if (add < Constants.NOTE_NUMBER - 1) {
                         notes[add + 1].setCompoundDrawablesWithIntrinsicBounds(null, getResources().getDrawable(R.drawable.plus), null, null);
+                        notes[add + 1].setText("Добавить файл");
                         notes[add + 1].setVisibility(View.VISIBLE);
                         notes[add + 1].setOnClickListener(new View.OnClickListener() {
                             @Override
