@@ -27,6 +27,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 import java.io.File;
+import java.net.URI;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -271,7 +272,7 @@ public class TaskRewrite extends Fragment {
                         notes[add + 1].setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                                Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
                                 intent.setType("*/*");
                                 intent.addCategory(Intent.CATEGORY_OPENABLE);
 
@@ -309,15 +310,12 @@ public class TaskRewrite extends Fragment {
                     notes[add].setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            Log.d("---", paths[a] + " " + a);
-                            String s = getPathFromUri(getApplicationContext() ,Uri.parse(paths[a]));
-                            Log.d("---", s + " " + a);
-                            //s = s.substring(0, s.lastIndexOf("/")+1);
-                            Log.d("---", s + " " + a);
-                            Intent openLinkIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(s));
-                            openLinkIntent.setDataAndType(Uri.parse(s), "*/*");
+                            Intent openLinkIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(paths[a]));
+                            openLinkIntent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+                            //openLinkIntent.setDataAndType(Uri.parse(paths[a]), "image/*");
+
                             if (openLinkIntent.resolveActivity(getApplicationContext().getPackageManager()) != null) {
-                                startActivity(openLinkIntent);
+                                startActivityForResult(openLinkIntent, 10);
                             } else {
                                 Log.d("Intent", "Не получается обработать намерение!");
                             }
@@ -366,12 +364,8 @@ public class TaskRewrite extends Fragment {
                     @Override
                     public void onClick(View view) {
                         Log.d("---", paths[finalI1] + " " + finalI1);
-                        Intent openLinkIntent = new Intent(Intent.ACTION_VIEW);
-                        String s = getPathFromUri(getApplicationContext() ,Uri.parse(paths[finalI1]));
-                        Log.d("---", s + " " + finalI1);
-                       // s = s.substring(0, s.lastIndexOf("/")+1);
-                        Log.d("---", s + " " + finalI1);
-                        openLinkIntent.setDataAndType(Uri.parse(s), "*/*");
+                        Intent openLinkIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(paths[finalI1]));
+                        openLinkIntent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
                         startActivity(openLinkIntent);
                     }
                 });
@@ -384,7 +378,7 @@ public class TaskRewrite extends Fragment {
                 notes[i].setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                        Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
                         intent.setType("*/*");
                         intent.addCategory(Intent.CATEGORY_OPENABLE);
 

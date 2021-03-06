@@ -64,12 +64,8 @@ public class TaskSingle extends Fragment {
                     @Override
                     public void onClick(View view) {
                         Log.d("---", paths[finalI1] + " " + finalI1);
-                        Intent openLinkIntent = new Intent(Intent.ACTION_VIEW);
-                        String s = TaskRewrite.getPathFromUri(getApplicationContext() ,Uri.parse(paths[finalI1]));
-                        Log.d("---", s + " " + finalI1);
-                        //s = s.substring(0, s.lastIndexOf("/")+1);
-                        Log.d("---", s + " " + finalI1);
-                        openLinkIntent.setDataAndType(Uri.parse(s), "*/*");
+                        Intent openLinkIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(paths[finalI1]));
+                        openLinkIntent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
                         startActivity(openLinkIntent);
 
                     }
