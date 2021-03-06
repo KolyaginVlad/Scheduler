@@ -407,7 +407,11 @@ public class TaskRewrite extends Fragment {
                         }
                     }
                 });
-            } else notes[i].setVisibility(View.INVISIBLE);
+            } else {
+                notes[i].setVisibility(View.INVISIBLE);
+                notes[i].setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
+                notes[i].setText("");
+            }
         }
         title.setText(bundle1.getString(Constants.TITLE_FIELD));
         time.setText(bundle1.getString(Constants.TIME_FIELD));
@@ -485,9 +489,10 @@ public class TaskRewrite extends Fragment {
                 boolean first = true;
                 for (i = 0; i < Constants.NOTE_NUMBER; i++) {
                     if (paths[i] != null) {
+                        File file = new File(TaskRewrite.getPathFromUri(getApplicationContext(), Uri.parse(paths[i])));
                         notes[i].setVisibility(View.VISIBLE);
                         notes[i].setCompoundDrawablesWithIntrinsicBounds(null, getResources().getDrawable(R.drawable.note), null, null);
-                        notes[i].setText(paths[i].substring(paths[i].lastIndexOf("/") + 1));
+                        notes[i].setText(file.getName());
                         registerForContextMenu(notes[i]);
                         int finalI1 = i;
                         notes[i].setOnClickListener(new View.OnClickListener() {
@@ -538,7 +543,11 @@ public class TaskRewrite extends Fragment {
                                 }
                             }
                         });
-                    } else notes[i].setVisibility(View.INVISIBLE);
+                    } else {
+                        notes[i].setVisibility(View.INVISIBLE);
+                        notes[i].setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
+                        notes[i].setText("");
+                    }
                 }
                 break;
             default:
